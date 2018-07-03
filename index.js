@@ -1,16 +1,17 @@
 'use strict';
-
-const express = require('express');
-
 // Constants
-const PORT = 80;
+const PORT = 3000;
 const HOST = '0.0.0.0';
+const express = require('express');
+const app = express();
 
 // App
-const app = express();
-app.get('/', (req, res) => {
-  res.send('Hello world\n');
-});
+app.engine('pug', require('pug').__express);
+app.set('view engine', 'pug');
 
-app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
+app.use(express.static(__dirname + '/public'));
+app.use(require('./controllers'));
+
+app.listen(PORT, HOST, ()=>{
+  console.log(`Running on http://${HOST}:${PORT}`);
+});
