@@ -11,6 +11,7 @@ app.set('view engine', 'pug');
 
 app.use(express.static(__dirname + '/public'));
 app.use(require('./controllers'));
+app.use(require('./middlewares/user'))
 
 app.listen(PORT, HOST, ()=>{
   console.log(`Running on http://${HOST}:${PORT}`);
